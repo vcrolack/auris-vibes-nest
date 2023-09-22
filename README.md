@@ -15,3 +15,12 @@ docker-compose up -d
 ```
 6. Levantar la base de datos
 ```docker-compose up -d```
+
+7. Levantar el proyecto
+```bash
+yarn start:dev
+```
+8. Ejecutar seed
+```
+http://localhost:300/api/v2/seed
+```
