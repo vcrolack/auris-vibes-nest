@@ -48,7 +48,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, id: true },
+      select: { fullName: true, email: true, password: true, id: true },
     });
 
     if (!user) throw new UnauthorizedException('Credentials are not valid');
@@ -65,6 +65,13 @@ export class AuthService {
   private getJwtToken(payload: JwtPayload) {
     const token = this.jwtService.sign(payload);
     return token;
+  }
+
+  async checkAuthStatus(user: User) {
+    return {
+      ...user,
+      token: this.getJwtToken({id: user.id}),
+    }
   }
 
   private handleDBErrors(error: any): never {
